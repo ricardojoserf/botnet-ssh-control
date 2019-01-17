@@ -42,3 +42,8 @@ pip3 install -r install/requirements.txt
 
 ![Screenshot](images/Screenshot_1.png)
 
+
+
+## Note
+
+Tested both in Python2.x (2.7.15rc1) and Python 3.x (3.6.7)
