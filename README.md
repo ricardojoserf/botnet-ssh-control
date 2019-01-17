@@ -1,11 +1,13 @@
 # BotNet-SSH-Control
-Botnet Command and Control (C&amp;C) controlled via SSH.
+Botnet Command and Control (C&amp;C) controlled via SSH using the Paramiko library.
 
 ## Usage
 
 Add the username, password and IP address of every system in *"ssh_users.txt"* file. Then, run:
 
-*python botnet_cc.py*
+```
+python botnet_cc.py
+```
 
 
 ## Requirements
