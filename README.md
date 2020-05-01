@@ -40,7 +40,7 @@ pip3 install -r install/requirements.txt
 - 6: Specific command - It runs as superuser (it is not necessary to add "sudo...")
 
 
-![Screenshot](images/Screenshot_1.png)
+![Screenshot](https://i.imgur.com/VeLzICD.png)
 
 
 
